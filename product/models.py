@@ -9,6 +9,9 @@ class singleImage(models.Model):
     class Meta:
         verbose_name_plural = "zimageContainer"
 
+    def __str__(self):
+        return self.image.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
