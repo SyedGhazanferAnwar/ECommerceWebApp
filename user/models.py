@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, firstName="", lastName="", address, password=None, active=True, staff=False, admin=False):
+    def create_user(self, email, firstName, lastName, address, password=None, active=True, staff=False, admin=False):
         if not email:
             raise ValueError("Users must have a valid Email address")
         if not staff and not admin:
@@ -14,7 +14,7 @@ class UserManager(BaseUserManager):
             if not address:
                 raise ValueError("Users must have a valid address")
         user = self.model(
-            email=self.normalize_email(email)
+            email=email
         )
         user.firstName = firstName,
         user.lastName = lastName,
@@ -30,16 +30,17 @@ class UserManager(BaseUserManager):
         if not password:
             raise ValueError("User nust have a valid password.")
         user = self.create_user(
-            email, password,
+            email=email, password=password,
             active=True,
+            address="asdasdsa",
             staff=True,
             admin=False,
-            firstName=firstName,
-            lastName=firstName
+            lastName=firstName,
+            firstName=firstName
         )
         return user
 
-    def create_superuser(self, email, password=None, firstName="", lastName="", *args, **kwargs):
+    def create_superuser(self, email, firstName="", password=None, lastName="", *args, **kwargs):
         if not password:
             raise ValueError("User nust have a valid password.")
         user = self.create_user(
@@ -47,7 +48,7 @@ class UserManager(BaseUserManager):
             active=True,
             staff=True,
             admin=True,
-            firstName=firstName,
+            address="asdasdsa",
             lastName=lastName
         )
         return user
