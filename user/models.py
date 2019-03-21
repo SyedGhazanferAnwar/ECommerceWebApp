@@ -30,13 +30,14 @@ class UserManager(BaseUserManager):
         if not password:
             raise ValueError("User nust have a valid password.")
         user = self.create_user(
-            email=email, password=password,
-            active=True,
-            address="asdasdsa",
-            staff=True,
-            admin=False,
-            lastName=firstName,
-            firstName=firstName
+            email,
+            firstName,
+            firstName,
+            "address",
+            password,
+            True,
+            True,
+            True,
         )
         return user
 
@@ -44,12 +45,14 @@ class UserManager(BaseUserManager):
         if not password:
             raise ValueError("User nust have a valid password.")
         user = self.create_user(
-            email, password,
-            active=True,
-            staff=True,
-            admin=True,
-            address="asdasdsa",
-            lastName=lastName
+            email,
+            firstName,
+            lastName,
+            "addressssssssss",
+            password,
+            bool("True"),
+            bool("True"),
+            bool("True")
         )
         return user
 
