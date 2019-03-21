@@ -1,0 +1,39 @@
+APPS
+
+1.Product:
+
+_model_product:
+	
+1.Name
+2.Category (Another model linked with Foreign Key)
+3.Rating
+4.Price 
+5.Stock	(Quantity)
+6.profile_image
+7.Images
+8.Description
+9.Discount
+10.Reviews
+
+_model_category:
+
+1.Name
+2.Description
+
+
+2.Cart (Maybe using module)
+
+
+
+3.User
+
+_model_User:
+
+1.First Name
+2.Last Name
+3.Email
+4.Password
+5.Address
+6.Type Of user( merchant,admin,client) //maybe django will manage
+7.Phone no
+
