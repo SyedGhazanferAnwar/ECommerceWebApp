@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=F:\DjangoWebApp\winenv"
+set "VIRTUAL_ENV=C:\Users\dell\Desktop\ecommercewebapp\winenv"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"

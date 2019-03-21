@@ -25,7 +25,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"F:\DjangoWebApp\winenv"
+$VIRTUAL_ENV = r"C:\Users\dell\Desktop\ecommercewebapp\winenv"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]
