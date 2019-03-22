@@ -149,33 +149,27 @@
           </div>
 
           <!-- Product -->
-          
-{%for i in qs%}
-<div class="product">
-  <div class="product_image">
-    <img src="{% static 'images/product_2.jpg' %}" alt="My image" />
-  </div>
-  <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
-  <div class="product_content">
-    <div class="product_title"><a href="product.html">{{i.name}}</a></div>
-    <div class="product_price">${{i.price}}</div>
-  </div>
-</div>
-{%endfor%}
-          
 
-
-
-          <!-- Product -->
-        
-
-          
-
-          <!-- Product -->
-          
+          {%for i in qs%}
+          <div class="product">
+            <div class="product_image">
+              <img src="{% static 'images/product_2.jpg' %}" alt="My image" />
+            </div>
+            <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
+            <div class="product_content">
+              <div class="product_title">
+                <a href="product.html">{{ i.name }}</a>
+              </div>
+              <div class="product_price">${{ i.price }}</div>
+            </div>
+          </div>
+          {%endfor%}
 
           <!-- Product -->
 
+          <!-- Product -->
+
+          <!-- Product -->
         </div>
       </div>
     </div>

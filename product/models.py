@@ -1,16 +1,9 @@
 from django.db import models
-
+#from django.contrib.auth.models import User
+from user.models import User
+#from django.conf.settings import AUTH_USER_MODEL
 # Create your models here.
 
-
-class singleImage(models.Model):
-    image = models.ImageField()
-
-    class Meta:
-        verbose_name_plural = "zimageContainer"
-
-    def __str__(self):
-        return self.image.name
 
 
 class Category(models.Model):
@@ -31,9 +24,26 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     profileImage = models.ImageField()
-    Images = models.ForeignKey(singleImage, on_delete=models.CASCADE)
     Description = models.TextField()
     Discount = models.IntegerField()
 
+    # 1 1 1,2,3,
     def __str__(self):
         return self.name
+
+class singleImage(models.Model):
+    image = models.ImageField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name_plural = "zimageContainer"
+
+    def __str__(self):
+        return self.image.name
+
+
+class Cart(models.Model):
+    _user=models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    models.ManyToManyField(Product)
+
+# 1 asd asdsa 10
+# bauhat sare cart mein aik product asakta hai

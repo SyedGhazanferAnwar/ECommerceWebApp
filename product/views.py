@@ -7,7 +7,7 @@ from django.http import HttpResponse
 def homepage(request):
     qs = Product.objects.all()
     for i in qs:
-        print(i.profileImage)
+        print(i.profileImage,i.name)
     return render(request, "index.html", {"qs":qs})
 
 
