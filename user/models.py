@@ -59,6 +59,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+
     email = models.EmailField(unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
