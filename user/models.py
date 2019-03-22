@@ -95,8 +95,6 @@ class User(AbstractBaseUser ):
     def is_admin(self):
         return self.admin
 
-    @property
-    def is_superuser(self):
-        return self.admin
+
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'email'
