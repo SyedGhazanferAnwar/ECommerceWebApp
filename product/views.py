@@ -1,11 +1,12 @@
 from django.shortcuts import render
-
+from .models import Product
 from django.http import HttpResponse
 # Create your views here.
 
 
 def homepage(request):
-    return render(request, "index.html", {})
+    qs = Product.objects.all()
+    return HttpResponse(qs)
 
 
 def product(request):
