@@ -21,5 +21,5 @@ def emailView(request):
             except BadHeaderError:
                 return HttpResponse('Invalid Header Found')
             return redirect('success')
-    return render(request, 'email.html', {'form':form})
+    return render(request, 'contact.html', {'form':form})
 
