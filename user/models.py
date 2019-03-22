@@ -57,7 +57,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, ):
+class User(AbstractBaseUser ):
     email = models.EmailField(unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
