@@ -96,5 +96,5 @@ class User(AbstractBaseUser ):
         return self.admin
 
 
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['firstName','lastName']
     USERNAME_FIELD = 'email'
