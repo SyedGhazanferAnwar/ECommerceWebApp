@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 
 def homepage(request):
-    return HttpResponse('Hello world')
+    return render(request, "index.html", {})
 
 
 def product(request):
