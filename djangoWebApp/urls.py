@@ -4,4 +4,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Product.urls')),
     path('', include('sendemail.urls')),
+    
 ]

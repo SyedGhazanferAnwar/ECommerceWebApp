@@ -6,7 +6,9 @@ from django.http import HttpResponse
 
 def homepage(request):
     qs = Product.objects.all()
-    return HttpResponse(qs)
+    for i in qs:
+        print(i.profileImage)
+    return render(request, "index.html", {"qs":qs})
 
 
 def product(request):
