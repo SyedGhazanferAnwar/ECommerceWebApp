@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "winenv\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
     "git.ignoreLimitWarning": true,
     "python.linting.pylintEnabled": false,
     "python.linting.pep8Enabled": true,
