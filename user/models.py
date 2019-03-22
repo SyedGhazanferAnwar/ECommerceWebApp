@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
 
 
 class UserManager(BaseUserManager):
@@ -58,8 +57,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-
+class User(AbstractBaseUser ):
     email = models.EmailField(unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -79,6 +77,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.firstName
 
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
     @property
     def is_staff(self):
         return self.staff
@@ -90,6 +94,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin(self):
         return self.admin
+
 
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'email'

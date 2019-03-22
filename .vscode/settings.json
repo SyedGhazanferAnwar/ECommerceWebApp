@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\Syed Ghazanfer Anwar\\envs\\winenv\\Scripts\\python.exe",
+    "python.pythonPath": "winenv\\Scripts\\python.exe",
     "git.ignoreLimitWarning": true,
     "python.linting.pylintEnabled": false,
     "python.linting.pep8Enabled": true,
