@@ -1,16 +1,45 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, Cart, Container
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
 def homepage(request):
     qs = Product.objects.all()
     for i in qs:
-        print(i.profileImage,i.name)
-    return render(request, "index.html", {"qs":qs})
+        print(i.id, i.name)
+    return render(request, "index.html", {"qs": qs})
 
 
+def product(request, id):
+    print(id)
+    return render(request, 'product.html', {})
 
-def product(request):
-    return HttpResponse('Product')
+
+def cart(request):
+    return render(request, 'cart.html', {})
+
+
+def addtocart(request, id, quantity):
+    print(request.user)
+    print("Asdasdsad", quantity)
+    if request.user.is_authenticated:
+        print("n000000")
+        print(id)
+        product = get_object_or_404(Product, pk=id)
+        i_user = request.user
+        cart, created = Cart.objects.get_or_create(user=i_user)
+        container, created = Container.objects.get_or_create(
+            product=product)
+        container.product = product
+        container.quantity = quantity
+        container.save()
+        cart.user = i_user
+        cart.container.add(container)
+        cart.save()
+        return HttpResponse('update Cart')
+    else:
+        return HttpResponse('unauthenticated')
