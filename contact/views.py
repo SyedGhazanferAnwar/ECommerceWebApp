@@ -15,5 +15,5 @@ def contactForm(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             print(first_name); print(last_name); print(subject); print(message)
-            return HttpResponse('{"status":"Success"}');
+            return HttpResponse('{"status":"Success"}')
     return render(request, 'contact.html',{'form':form})

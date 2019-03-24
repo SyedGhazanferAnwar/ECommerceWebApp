@@ -1,17 +1,10 @@
 from django.shortcuts import render
-from .models import Product, Cart, Container
+from .models import Cart, Container
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
-
-def homepage(request):
-    qs = Product.objects.all()
-    for i in qs:
-        print(i.id, i.name)
-    return render(request, "index.html", {"qs": qs})
 
 
 def product(request, id):
@@ -21,7 +14,6 @@ def product(request, id):
 
 def cart(request):
     return render(request, 'cart.html', {})
-
 
 def addtocart(request, id, quantity):
     print(request.user)
