@@ -24,3 +24,6 @@ class Cartx(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+#~/AHussam/

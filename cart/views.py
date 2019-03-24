@@ -15,3 +15,5 @@ def cart_home(request):
         cart_obj = Cartx.objects.new(user=request.user)
         request.session['cart_id'] = cart_obj.id
     return render(request, "play_cart.html", {})
+
+#~/AHussam/

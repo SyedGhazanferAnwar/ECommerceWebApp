@@ -3,13 +3,7 @@ from django.http import HttpResponse
 from .models import Category
 
 # Create your views here.
-def homepage(request):
-    return HttpResponse("Hello")
+def category(request):
+    return HttpResponse('This page will show up categories.')
 
-def Category(request):
-    #cat=Category.objects.all()
-    #return HttpResponse(cat) 
-    
-    
-    #return HttpResponse("Hello")
-	return render(request,'YAB/Categories.html')
+#~/AHussam/
