@@ -15,8 +15,9 @@ def homepage(request):
 
 
 def product(request, id):
-    print(id)
-    return render(request, 'product.html', {})
+    print('I am heeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrew')
+    ProductObj = get_object_or_404(Product, pk = id)
+    return render(request, 'product.html', {'product':ProductObj})
 
 
 def cart(request):

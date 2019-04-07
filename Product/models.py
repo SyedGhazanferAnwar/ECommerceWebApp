@@ -26,6 +26,9 @@ class Product(models.Model):
     Description = models.TextField()
     Discount = models.PositiveIntegerField()
 
+    def getDiscountedPrice(self):
+        return str(float(self.price)*(self.Discount/100))
+
     # 1 1 1,2,3,
     def __str__(self):
         return self.name
