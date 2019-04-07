@@ -25,11 +25,11 @@ def cart(request):
     else: 
         mcart = get_object_or_404(Cart, user=request.user)
         container = Container.objects.filter(cart=mcart)
+        totalPrice=0
         for i in container:
-            mcart.totalPrice += i.product.price*i.quantity
-        mcart.save()
+            totalPrice += i.product.price*i.quantity
         # print(container[0].product)
-        return render(request, 'cart.html', {'container': container})
+        return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
 
 
 # @register.simple_tag()
@@ -53,7 +53,6 @@ def addtocart(request, id, quantity):
         container.quantity = quantity
         container.save()
         cart.user = i_user
-        cart.totalPrice=0
         cart.container.add(container)
         cart.save()
         return HttpResponse('update Cart')
