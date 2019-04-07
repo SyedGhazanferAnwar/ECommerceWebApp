@@ -177,6 +177,7 @@ $(document).ready(function () {
     // var input = $$('#quantity_input');
     var incButton = $$('#quantity_inc_button');
     var decButton = $$('#quantity_dec_button');
+
     for (var i = 0; i < incButton.length; i++) {
 
       // var originalVal;
@@ -199,6 +200,7 @@ $(document).ready(function () {
       inc.on('click', function () {
 
         var im = $(this).attr('class')
+        console.log(im);
         var z = im.split(" ");
         var lastChar = z[1].substr(z[1].length - 1);
 
