@@ -39,7 +39,8 @@ $(document).ready(function () {
   initSearch();
   initMenu();
   initQuantity();
-
+  clearCart();
+  updateCart();
   /* 
 
 	2. Set Header
@@ -154,48 +155,20 @@ $(document).ready(function () {
   }
 
   function initQuantity() {
-    // Handle product quantity input
-    // if ($('.product_quantity').length) {
-    //   var input = $('.quantity_input');
-    //   var incButton = $('.quantity_inc');
-    //   var decButton = $('.quantity_dec');
-    //   var originalVal;
-    //   var endVal;
-    //   incButton.on('click', function() {
-    //     originalVal = input.val();
-    //     endVal = parseFloat(originalVal) + 1;
-    //     input.val(endVal);
-    //   });
-    //   decButton.on('click', function() {
-    //     originalVal = input.val();
-    //     if (originalVal > 0) {
-    //       endVal = parseFloat(originalVal) - 1;
-    //       input.val(endVal);
-    //     }
-    //   });
-    // }
-    // var input = $$('#quantity_input');
+  
     var incButton = $$('#quantity_inc_button');
     var decButton = $$('#quantity_dec_button');
     for (var i = 0; i < incButton.length; i++) {
 
-      // var originalVal;
-      // var endVal;
+ 
       var inc = $(incButton[i]).attr('class');
       var z = inc.split(" ");
       var dec = $(decButton[i]).attr('class');
       var z2 = dec.split(" ");
-      // var inp = $(input[i]).attr('class');
-      // var z3 = inp.split(" ");
-      // console.log(z[1])
-      // console.log(z2[1])
-      // console.log(z3[0])
-
+ 
       inc = $('.' + z[1])
       dec = $('.' + z2[1])
-      // inp = $('.' + z3[0])
 
-      // console.log(inp)
       inc.on('click', function () {
 
         var im = $(this).attr('class')
@@ -223,4 +196,36 @@ $(document).ready(function () {
     }
   }
 
+  //Doing clear cart and update cart
+  
+  function updateCart(){
+    $('.update_cart_button').on('click',()=>{
+      alert("AWWADS")
+      $.ajax({
+        type: 'GET',
+        url: window.location.href + '/update/',
+        success: function(result) {
+          alert(result);
+        },
+        error: function(result) {
+          alert('error');
+        },
+      });
+    })
+  }
+  function clearCart(){
+    $('.clear_cart_button').on('click',()=>{
+      alert(window.location.href + '/clear/')
+      $.ajax({
+        type: 'GET',
+        url: window.location.href + '/clear',
+        success: function(result) {
+          alert(result);
+        },
+        error: function(result) {
+          alert('error');
+        },
+      });
+    })
+  }
 });

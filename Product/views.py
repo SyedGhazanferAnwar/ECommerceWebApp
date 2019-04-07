@@ -24,13 +24,16 @@ def cart(request):
     if not request.user.is_authenticated:
         return redirect('/admin')
     else: 
-        mcart = get_object_or_404(Cart, user=request.user)
-        container = Container.objects.filter(cart=mcart)
-        totalPrice=0
-        for i in container:
-            totalPrice += i.product.price*i.quantity
-        # print(container[0].product)
-        return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
+        mcart = Cart.objects.filter(user=request.user)
+        if len(mcart) <=0:
+            return render(request, 'cart.html', {'container': None,'cartPrice':None})
+        else:
+            container = Container.objects.filter(cart=mcart)
+            totalPrice=0
+            for i in container:
+                totalPrice += i.product.price*i.quantity
+            # print(container[0].product)
+            return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
 
 
 # @register.simple_tag()
@@ -38,6 +41,12 @@ def cart(request):
 #     # you would need to do any localization of the result here
 #     return qty * unit_price
 
+def clearCart(request):
+    mcart = get_object_or_404(Cart, user=request.user)
+    Container.objects.filter(cart=mcart).delete()
+    Cart.objects.filter(user=request.user).delete()
+    print("clearCart")
+    return HttpResponse("Sucessfully Cleared")
 
 def addtocart(request, id, quantity):
     print(request.user)
