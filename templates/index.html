@@ -137,16 +137,6 @@
       <div class="col">
         <div class="product_grid">
           <!-- Product -->
-          <div class="product">
-            <div class="product_image">
-              <img src="{% static 'images/product_1.jpg' %}" alt="My image" />
-            </div>
-            <div class="product_extra product_new"><a href="categories.html">New</a></div>
-            <div class="product_content">
-              <div class="product_title"><a href="product.html">Smart Phone</a></div>
-              <div class="product_price">$670</div>
-            </div>
-          </div>
 
           <!-- Product -->
 
@@ -158,7 +148,7 @@
             <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
             <div class="product_content">
               <div class="product_title">
-                <a href="product.html">{{ i.name }}</a>
+                <a href="/product/{{i.id}}">{{ i.name }}</a>
               </div>
               <div class="product_price">${{ i.price }}</div>
             </div>

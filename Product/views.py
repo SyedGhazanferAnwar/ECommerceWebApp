@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Product, Cart, Container
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404,redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -9,8 +9,15 @@ from django.contrib.auth.decorators import login_required
 
 def homepage(request):
     qs = Product.objects.all()
-    for i in qs:
-        print(i.id, i.name)
+    # if request.user.is_authenticated:
+    #     mcart = Cart.objects.filter(user=request.user)
+    #     print(cart)
+
+    #     if cart is not None:
+    #         container = Container.objects.filter(cart=mcart[0])
+    #         return HttpResponse(container)
+    #         print(container)
+
     return render(request, "index.html", {"qs": qs})
 
 
@@ -23,6 +30,7 @@ def product(request, id):
 def cart(request):
     if not request.user.is_authenticated:
         return redirect('/admin')
+<<<<<<< HEAD
     else: 
         mcart = Cart.objects.filter(user=request.user)
         if len(mcart) <=0:
@@ -34,6 +42,16 @@ def cart(request):
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
             return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
+=======
+    else:
+        mcart = get_object_or_404(Cart, user=request.user)
+        container = Container.objects.filter(cart=mcart)
+        totalPrice = 0
+        for i in container:
+            totalPrice += i.product.price*i.quantity
+        # print(container[0].product)
+        return render(request, 'cart.html', {'container': container, 'cartPrice': totalPrice})
+>>>>>>> a1f9189b9ef95848b2c6e5649a8eb4e650d90559
 
 
 # @register.simple_tag()
