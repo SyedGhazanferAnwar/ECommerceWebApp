@@ -41,8 +41,8 @@
             <div class="product_extra product_new"><a href="categories.html">{{ product.category }}</a></div>
           </div>
           <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-            <div class="details_image_thumbnail active" data-image="images/details_1.jpg">
-              <img src="{% static 'images/details_1.jpg' %}" alt="" />
+            <div class="details_image_thumbnail active" data-image="/{{ product.profileImage.url }}">
+              <img src="/{{ product.profileImage.url }}" alt="" />
             </div>
             <div class="details_image_thumbnail" data-image="images/details_2.jpg">
               <img src="{% static 'images/details_2.jpg' %}" alt="" />
