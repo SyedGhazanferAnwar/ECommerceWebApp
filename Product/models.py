@@ -1,9 +1,19 @@
 from django.db import models
 #from django.contrib.auth.models import User
 from user.models import User
-from categories.models import Category
 #from django.conf.settings import AUTH_USER_MODEL
 # Create your models here.
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
 
 
 class Product(models.Model):
@@ -46,6 +56,7 @@ class Cart(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     # contains one product and its quantity
     container = models.ManyToManyField(Container)
+    # totalPrice = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
         return self.user.firstName+' '+self.user.lastName+'(CART)'

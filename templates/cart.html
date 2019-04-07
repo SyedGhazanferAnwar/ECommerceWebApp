@@ -43,41 +43,50 @@
     <div class="row cart_items_row">
       <div class="col">
         <!-- Cart Item -->
+
+        {%for x in container %}
         <div
-          class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start"
-        >
+          class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
           <!-- Name -->
           <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
             <div class="cart_item_image">
-              <div><img src="{% static 'images/cart_1.jpg' %}" alt="" /></div>
+              <div><img src="{{ x.product.profileImage | default:'profile.jpg' }}" /></div>
             </div>
             <div class="cart_item_name_container">
-              <div class="cart_item_name"><a href="#">Smart Phone Deluxe Edition</a></div>
+              <div class="cart_item_name">
+                <a href="#">{{ x.product.name }}</a>
+              </div>
               <div class="cart_item_edit"><a href="#">Edit Product</a></div>
             </div>
           </div>
           <!-- Price -->
-          <div class="cart_item_price">$790.90</div>
+          <div class="cart_item_price">${{ x.product.price }}</div>
           <!-- Quantity -->
           <div class="cart_item_quantity">
             <div class="product_quantity_container">
               <div class="product_quantity clearfix">
                 <span>Qty</span>
-                <input id="quantity_input" type="text" pattern="[0-9]*" value="1" />
+
+                <input id="quantity_input" class="quantity_input{{ forloop.counter }}" type="text" pattern="[0-9]*"
+                  value="{{ x.quantity }}" />
                 <div class="quantity_buttons">
-                  <div id="quantity_inc_button" class="quantity_inc quantity_control">
+                  <div id="quantity_inc_button" class="quantity_control quantity_inc{{ forloop.counter }}">
+
                     <i class="fa fa-chevron-up" aria-hidden="true"></i>
                   </div>
-                  <div id="quantity_dec_button" class="quantity_dec quantity_control">
+                  <div id="quantity_dec_button" class="quantity_control quantity_dec{{ forloop.counter }}">
                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
           <!-- Total -->
-          <div class="cart_item_total">$790.90</div>
+          <div class="cart_item_total">${% widthratio x.quantity 1 x.product.price %}</div>
+          <!-- using widthratio for multiplication of quantity and price -->
         </div>
+        {%endfor%}
       </div>
     </div>
     <div class="row row_cart_buttons">
@@ -98,20 +107,8 @@
           <div class="section_title">Shipping method</div>
           <div class="section_subtitle">Select the one you want</div>
           <div class="delivery_options">
-            <label class="delivery_option clearfix"
-              >Next day delivery
-              <input type="radio" name="radio" />
-              <span class="checkmark"></span>
-              <span class="delivery_price">$4.99</span>
-            </label>
-            <label class="delivery_option clearfix"
-              >Standard delivery
-              <input type="radio" name="radio" />
-              <span class="checkmark"></span>
-              <span class="delivery_price">$1.99</span>
-            </label>
-            <label class="delivery_option clearfix"
-              >Personal pickup
+
+            <label class="delivery_option clearfix">Personal pickup
               <input type="radio" checked="checked" name="radio" />
               <span class="checkmark"></span>
               <span class="delivery_price">Free</span>
@@ -119,17 +116,6 @@
           </div>
         </div>
 
-        <!-- Coupon Code -->
-        <div class="coupon">
-          <div class="section_title">Coupon code</div>
-          <div class="section_subtitle">Enter your coupon code</div>
-          <div class="coupon_form_container">
-            <form action="#" id="coupon_form" class="coupon_form">
-              <input type="text" class="coupon_input" required="required" />
-              <button class="button coupon_button"><span>Apply</span></button>
-            </form>
-          </div>
-        </div>
       </div>
 
       <div class="col-lg-6 offset-lg-2">
@@ -140,7 +126,7 @@
             <ul>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="cart_total_title">Subtotal</div>
-                <div class="cart_total_value ml-auto">$790.90</div>
+                <div class="cart_total_value ml-auto">{{container.cart.totalPrice}}</div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="cart_total_title">Shipping</div>

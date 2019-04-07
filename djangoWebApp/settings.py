@@ -21,6 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'wf*=u5=pc@g+2*)(=#$52y444h0u5wq4puphv6lb38p@4weg%w'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -32,9 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'user',
     'Product',
-    'contact',
-    'cart',
-    'categories',              #~/AHussam/
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
