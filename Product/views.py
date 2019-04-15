@@ -24,7 +24,8 @@ def homepage(request):
 def product(request, id):
     print('I am heeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrew')
     ProductObj = get_object_or_404(Product, pk = id)
-    return render(request, 'product.html', {'product':ProductObj})
+    related_prods = Product.objects.filter(category = ProductObj.category).exclude(pk = id)[:4]
+    return render(request, 'product.html', {'product':ProductObj,'related':related_prods})
 
 
 def cart(request):
