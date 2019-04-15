@@ -30,7 +30,6 @@ def product(request, id):
 def cart(request):
     if not request.user.is_authenticated:
         return redirect('/admin')
-<<<<<<< HEAD
     else: 
         mcart = Cart.objects.filter(user=request.user)
         if len(mcart) <=0:
@@ -42,16 +41,7 @@ def cart(request):
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
             return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
-=======
-    else:
-        mcart = get_object_or_404(Cart, user=request.user)
-        container = Container.objects.filter(cart=mcart)
-        totalPrice = 0
-        for i in container:
-            totalPrice += i.product.price*i.quantity
-        # print(container[0].product)
-        return render(request, 'cart.html', {'container': container, 'cartPrice': totalPrice})
->>>>>>> a1f9189b9ef95848b2c6e5649a8eb4e650d90559
+
 
 
 # @register.simple_tag()
