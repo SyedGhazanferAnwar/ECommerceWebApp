@@ -2,6 +2,8 @@
 <!-- Home -->
 <link rel="stylesheet" type="text/css" href="{% static 'styles/cart.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'styles/cart_responsive.css' %}" />
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
 <div class="home">
   <div class="home_container">
     <div class="home_background" style="background-image:url({% static 'images/cart.jpg' %})"></div>
@@ -56,6 +58,7 @@
               <div class="cart_item_name">
                 <a href="#">{{ x.product.name }}</a>
               </div>
+              <div style="color: #fff;" class="cart_item_id">{{x.product.pk}}</div>
               <div class="cart_item_edit"><a href="#">Edit Product</a></div>
             </div>
           </div>

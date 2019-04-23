@@ -46,8 +46,7 @@ class singleImage(models.Model):
 
 
 class Container(models.Model):
-    product = models.OneToOneField(
-        Product, on_delete=models.CASCADE, primary_key=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=None, blank=True, null=True)
 
     def __str__(self):

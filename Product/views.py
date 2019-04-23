@@ -30,34 +30,37 @@ def product(request, id):
 def cart(request):
     if not request.user.is_authenticated:
         return redirect('/admin')
-<<<<<<< HEAD
     else: 
         mcart = Cart.objects.filter(user=request.user)
         if len(mcart) <=0:
             return render(request, 'cart.html', {'container': None,'cartPrice':None})
         else:
-            container = Container.objects.filter(cart=mcart)
+            container = Container.objects.filter(cart=mcart[0])
             totalPrice=0
             for i in container:
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
             return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
-=======
-    else:
-        mcart = get_object_or_404(Cart, user=request.user)
-        container = Container.objects.filter(cart=mcart)
-        totalPrice = 0
-        for i in container:
-            totalPrice += i.product.price*i.quantity
-        # print(container[0].product)
-        return render(request, 'cart.html', {'container': container, 'cartPrice': totalPrice})
->>>>>>> a1f9189b9ef95848b2c6e5649a8eb4e650d90559
 
 
 # @register.simple_tag()
 # def multiply(qty, unit_price, *args, **kwargs):
 #     # you would need to do any localization of the result here
 #     return qty * unit_price
+
+def updateCart(request):
+    if request.method=='POST':
+        item_ids=request.POST.get('item_ids')
+        quantity=request.POST.get('quantity')
+        print(item_ids)
+        print(quantity)
+        for i in range(0,len(item_ids)):
+            cart=Cart.objects.get(user=request.user)
+            yproduct = Product.objects.get(pk=item_ids[0])
+            container=Container.objects.get(product=yproduct,cart=cart)
+            container.quantity=quantity[0]
+            container.save()
+    return HttpResponse("UPDATED")
 
 def clearCart(request):
     mcart = get_object_or_404(Cart, user=request.user)
@@ -76,7 +79,7 @@ def addtocart(request, id, quantity):
         i_user = request.user
         cart, created = Cart.objects.get_or_create(user=i_user)
         container, created = Container.objects.get_or_create(
-            product=product)
+            product=product,cart=cart)
         container.product = product
         container.quantity = quantity
         container.save()

@@ -203,18 +203,45 @@ $(document).ready(function () {
   function updateCart(){
     $('.update_cart_button').on('click',()=>{
       alert("AWWADS")
-      $.ajax({
-        type: 'GET',
-        url: window.location.href + '/update/',
-        success: function(result) {
-          alert(result);
-        },
-        error: function(result) {
-          alert('error');
-        },
+      var item_ids=$$('.cart_item_id')
+      var quantity=$$('#quantity_input')
+      console.log(item_ids)
+      console.log(quantity)
+      var a=[]
+      var b=[]
+      for(var i=0;i<item_ids.length;i++){
+        a[i]=item_ids[i].innerText
+        b[i]=quantity[i].defaultValue
+      }
+      console.log(a)
+      console.log(b)
+          $.ajax({
+            url: window.location.href + '/update',
+            type: "post",
+            data: {"item_ids":a.toString(),"quantity":b.toString(),csrfmiddlewaretoken: $('#CSRF').val()},
+            success: function(result) {
+              alert(result);
+            },
+            error: function(result) {
+              alert('error');
+            }
+        });
       });
-    })
-  }
+    }
+  
+      
+      // $.ajax({
+      //   type: 'GET',
+      //   url: window.location.href + '/update/',
+      //   success: function(result) {
+      //     alert(result);
+      //   },
+      //   error: function(result) {
+      //     alert('error');
+      //   },
+      // });
+    
+
   function clearCart(){
     $('.clear_cart_button').on('click',()=>{
       alert(window.location.href + '/clear/')
@@ -223,6 +250,7 @@ $(document).ready(function () {
         url: window.location.href + '/clear',
         success: function(result) {
           alert(result);
+          location.reload()
         },
         error: function(result) {
           alert('error');

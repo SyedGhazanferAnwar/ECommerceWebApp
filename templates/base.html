@@ -9,7 +9,7 @@
 
 {% load static %}
 
-
+<input type="hidden" name="CSRF" id="CSRF" value="{{csrf_token}}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}"></script>
 
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}"></script>
