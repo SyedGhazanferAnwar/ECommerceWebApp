@@ -10,7 +10,7 @@
 
   <!-- Home -->
   {% load static %}
-  <div class="home">
+  <div class="home" style="height: 625px;">
     <div class="home_container">
       <div class="home_background" style="background-image:url({% static 'images/categories.jpg' %})"></div>
       <div class="home_content_container">
@@ -35,7 +35,7 @@
 
   <!-- Products -->
 
-  <div class="products">
+  <div class="productsCustom" style="z-index: 2;background: #FFFFFF;width: 100%;">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -105,7 +105,7 @@
         <!-- Icon Box -->
         <div class="col-lg-4 icon_box_col">
           <div class="icon_box">
-            <div class="icon_box_image"><img src="images/icon_1.svg" alt="" /></div>
+            <div class="icon_box_image"><img src="{% static 'images/icon_1.svg' %}" alt="" /></div>
             <div class="icon_box_title">Free Shipping Worldwide</div>
             <div class="icon_box_text">
               <p>
@@ -118,7 +118,7 @@
         <!-- Icon Box -->
         <div class="col-lg-4 icon_box_col">
           <div class="icon_box">
-            <div class="icon_box_image"><img src="images/icon_2.svg" alt="" /></div>
+            <div class="icon_box_image"><img src="{% static 'images/icon_2.svg' %}" alt="" /></div>
             <div class="icon_box_title">Free Returns</div>
             <div class="icon_box_text">
               <p>
@@ -131,7 +131,7 @@
         <!-- Icon Box -->
         <div class="col-lg-4 icon_box_col">
           <div class="icon_box">
-            <div class="icon_box_image"><img src="images/icon_3.svg" alt="" /></div>
+            <div class="icon_box_image"><img src="{% static 'images/icon_3.svg' %}" alt="" /></div>
             <div class="icon_box_title">24h Fast Support</div>
             <div class="icon_box_text">
               <p>
@@ -178,7 +178,7 @@
 
   <div class="footer_overlay"></div>
   <footer class="footer">
-    <div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
+    <div class="footer_background" style="background-image:url({% static 'images/footer.jpg' %})"></div>
     <div class="container">
       <div class="row">
         <div class="col">
