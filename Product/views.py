@@ -46,21 +46,12 @@ def cart(request):
         if len(mcart) <= 0:
             return render(request, 'cart.html', {'container': None, 'cartPrice': None})
         else:
-<<<<<<< HEAD
             container = Container.objects.filter(cart=mcart[0])
             totalPrice=0
-=======
-            container = Container.objects.filter(cart=mcart)
-            totalPrice = 0
->>>>>>> f35e5e60607bac559acd99efc0f98765cde1d946
             for i in container:
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
             return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
-<<<<<<< HEAD
-=======
-
->>>>>>> f35e5e60607bac559acd99efc0f98765cde1d946
 
 
 # @register.simple_tag()
