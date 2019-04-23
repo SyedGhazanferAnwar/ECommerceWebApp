@@ -11,13 +11,14 @@
 
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}"></script>
-
+<link rel="stylesheet" type="text/css" href="{%static 'styles/categories.css'%}">
+<link rel="stylesheet" type="text/css" href="{%static 'styles/categories_responsive.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
 
 
 
@@ -57,13 +58,12 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="categories.html">Categories</a>
+										<a href="#">Categories</a>
 										<ul>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
+											
+											{%for i in qsc%}
+											<li><a href="/category/{{i.name}}">{{i.name}}</a></li>
+											{%endfor%}
 										</ul>
 									</li>
 									<li><a href="#">Accessories</a></li>
@@ -84,7 +84,7 @@
 													c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
 											</g>
 										</svg>
-										<div>Cart <span>(0)</span></div>
+										<div>Cart <span>({{product_count}})</span></div>
 									</a>
 								</div>
 								<div class="search">
@@ -235,10 +235,15 @@
     <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
     <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
     <script src="{% static 'plugins/easing/easing.js' %}"></script>
-    <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+	<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+	<script src="{% static 'js/categories.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
     
 
 
 </body>
 </html>    
+
+
+
+
