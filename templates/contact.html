@@ -13,7 +13,7 @@
             <div class="home_content">
               <div class="breadcrumbs">
                 <ul>
-                  <li><a href="index.html">Home</a></li>
+                  <li><a href="/">Home</a></li>
                   <li>Contact</li>
                 </ul>
               </div>
@@ -35,6 +35,14 @@
         <div class="get_in_touch">
           <div class="section_title">Get in Touch</div>
           <div class="section_subtitle">Say hello</div>
+          {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+            <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:red">{{ message }}</li> -->
+            <div class="alert alert-success" role="alert" >{{ message }}</div>
+          {% endfor %}
+          </ul>
+        {% endif %}
           <div class="contact_form_container">
             <form action="#" id="contact_form" class="contact_form" method='POST'> {% csrf_token %}
               {{ form }}
@@ -77,7 +85,9 @@
         <div class="map">
           <div id="google_map" class="google_map">
             <div class="map_container">
-              <div id="map"></div>
+              <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14480.813911520625!2d67.2646838!3d24.8568991!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x823a6a0100195ffd!2sFAST+University+Karachi+Campus!5e0!3m2!1sen!2s!4v1555533380522!5m2!1sen!2s" width="1680" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Cart, Container
+from .models import Product, Cart, Container, Category
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -7,24 +7,35 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+def get_product_count(request):
+    if request.user.is_authenticated:
+        mcart = Cart.objects.filter(user=request.user)
+        if cart is not None:
+            container = Container.objects.filter(cart=mcart[0])
+            return len(container)
+        return 0
+    else:
+        return 0
+
+
+def category(request, cat):
+    qs = Product.objects.filter(category__name=cat)
+    qsc = Category.objects.all()
+    print(qsc)
+    return render(request, "categories.html", {"qs": qs, "product_count": get_product_count(request), "qsc": qsc})
+
+
 def homepage(request):
     qs = Product.objects.all()
-    # if request.user.is_authenticated:
-    #     mcart = Cart.objects.filter(user=request.user)
-    #     print(cart)
 
-    #     if cart is not None:
-    #         container = Container.objects.filter(cart=mcart[0])
-    #         return HttpResponse(container)
-    #         print(container)
-
-    return render(request, "index.html", {"qs": qs})
+    return render(request, "index.html", {"qs": qs, "product_count": get_product_count(request)})
 
 
 def product(request, id):
     print('I am heeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrew')
     ProductObj = get_object_or_404(Product, pk = id)
-    return render(request, 'product.html', {'product':ProductObj})
+    related_prods = Product.objects.filter(category = ProductObj.category).exclude(pk = id)[:4]
+    return render(request, 'product.html', {'product':ProductObj,'related':related_prods})
 
 
 def cart(request):
@@ -32,15 +43,24 @@ def cart(request):
         return redirect('/admin')
     else: 
         mcart = Cart.objects.filter(user=request.user)
-        if len(mcart) <=0:
-            return render(request, 'cart.html', {'container': None,'cartPrice':None})
+        if len(mcart) <= 0:
+            return render(request, 'cart.html', {'container': None, 'cartPrice': None})
         else:
+<<<<<<< HEAD
             container = Container.objects.filter(cart=mcart[0])
             totalPrice=0
+=======
+            container = Container.objects.filter(cart=mcart)
+            totalPrice = 0
+>>>>>>> f35e5e60607bac559acd99efc0f98765cde1d946
             for i in container:
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
             return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35e5e60607bac559acd99efc0f98765cde1d946
 
 
 # @register.simple_tag()
@@ -68,6 +88,7 @@ def clearCart(request):
     Cart.objects.filter(user=request.user).delete()
     print("clearCart")
     return HttpResponse("Sucessfully Cleared")
+
 
 def addtocart(request, id, quantity):
     print(request.user)

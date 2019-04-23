@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm
-from django.http import HttpResponse
+from .models import Message
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 
@@ -12,8 +14,11 @@ def contactForm(request):
         if form.is_valid():
             first_name = form.cleaned_data['firstName']
             last_name = form.cleaned_data['lastName']
+            email = form.cleaned_data['email']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
+            msg_instance = Message.objects.create(firstName = first_name, lastName = last_name, email = email, subject = subject ,message = message)
             print(first_name); print(last_name); print(subject); print(message)
-            return HttpResponse('{"status":"Success"}');
+            messages.success(request,'Form submission successful')
+            return HttpResponseRedirect('')
     return render(request, 'contact.html',{'form':form})
