@@ -8,50 +8,63 @@ from django.contrib.auth.decorators import login_required
 
 
 def get_product_count(request):
-    if request.user.is_authenticated:
-        mcart = Cart.objects.filter(user=request.user)
-        if cart is not None:
-            container = Container.objects.filter(cart=mcart[0])
-            return len(container)
+    try:
+        if request.user.is_authenticated:
+            mcart = Cart.objects.filter(user=request.user)
+            if cart is not None:
+                container = Container.objects.filter(cart=mcart[0])
+                return len(container)
+            return 0
+        else:
+            return 0
         return 0
-    else:
+    except:
         return 0
 
 
 def category(request, cat):
     qs = Product.objects.filter(category__name=cat)
     qsc = Category.objects.all()
+    des = get_object_or_404(Category,name = cat)
     print(qsc)
-    return render(request, "categories.html", {"qs": qs, "product_count": get_product_count(request), "qsc": qsc})
+    return render(request, "categories.html", {
+        "qs": qs, 
+        "product_count": get_product_count(request),
+        "qsc": qsc,
+        "catName":cat,
+        "des":des.description
+        })
 
 
 def homepage(request):
     qs = Product.objects.all()
-
-    return render(request, "index.html", {"qs": qs, "product_count": get_product_count(request)})
+    qsc = Category.objects.all()
+    return render(request, "index.html", {"qs": qs, "product_count": get_product_count(request),"qsc":qsc})
 
 
 def product(request, id):
+    qsc = Category.objects.all()
     print('I am heeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrew')
     ProductObj = get_object_or_404(Product, pk = id)
     related_prods = Product.objects.filter(category = ProductObj.category).exclude(pk = id)[:4]
-    return render(request, 'product.html', {'product':ProductObj,'related':related_prods})
+    return render(request, 'product.html', {"qsc":qsc,'product':ProductObj,'related':related_prods, "product_count": get_product_count(request)})
 
 
 def cart(request):
+    qsc = Category.objects.all()
     if not request.user.is_authenticated:
         return redirect('/admin')
     else: 
         mcart = Cart.objects.filter(user=request.user)
         if len(mcart) <= 0:
-            return render(request, 'cart.html', {'container': None, 'cartPrice': None})
+            return render(request, 'cart.html', {'container': None, 'cartPrice': None,"qsc":qsc, "product_count": get_product_count(request)})
         else:
             container = Container.objects.filter(cart=mcart[0])
             totalPrice=0
             for i in container:
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
-            return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
+            return render(request, 'cart.html', {"qsc":qsc,'container': container,'cartPrice':totalPrice, "product_count": get_product_count(request)})
 
 
 # @register.simple_tag()
