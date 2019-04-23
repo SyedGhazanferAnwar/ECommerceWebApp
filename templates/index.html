@@ -143,9 +143,9 @@
           {%for i in qs%}
           <div class="product">
             <div class="product_image">
-              <img src="/{{i.profileImage}}" alt="My image" />
+              <img src="{{i.profileImage}}" alt="My image" height="220" width="200"/>
             </div>
-            <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
+            <div class="product_extra product_sale"><a href="categories.html">{{ i.category }}</a></div>
             <div class="product_content">
               <div class="product_title">
                 <a href="/product/{{i.id}}">{{ i.name }}</a>

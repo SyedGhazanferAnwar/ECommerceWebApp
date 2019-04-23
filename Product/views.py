@@ -33,14 +33,15 @@ def homepage(request):
 
 def product(request, id):
     print('I am heeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrew')
-    ProductObj = get_object_or_404(Product, pk=id)
-    return render(request, 'product.html', {'product': ProductObj})
+    ProductObj = get_object_or_404(Product, pk = id)
+    related_prods = Product.objects.filter(category = ProductObj.category).exclude(pk = id)[:4]
+    return render(request, 'product.html', {'product':ProductObj,'related':related_prods})
 
 
 def cart(request):
     if not request.user.is_authenticated:
         return redirect('/admin')
-    else:
+    else: 
         mcart = Cart.objects.filter(user=request.user)
         if len(mcart) <= 0:
             return render(request, 'cart.html', {'container': None, 'cartPrice': None})
@@ -50,7 +51,8 @@ def cart(request):
             for i in container:
                 totalPrice += i.product.price*i.quantity
             # print(container[0].product)
-            return render(request, 'cart.html', {'container': container, 'cartPrice': totalPrice})
+            return render(request, 'cart.html', {'container': container,'cartPrice':totalPrice})
+
 
 
 # @register.simple_tag()
