@@ -18,7 +18,6 @@ def contactForm(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             msg_instance = Message.objects.create(firstName = first_name, lastName = last_name, email = email, subject = subject ,message = message)
-            print(first_name); print(last_name); print(subject); print(message)
             messages.success(request,'Form submission successful')
             return HttpResponseRedirect('')
     return render(request, 'contact.html',{'form':form})

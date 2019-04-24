@@ -3,6 +3,7 @@ from .models import Product, Cart, Container, Category
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from newsletter.views import newsletter_signup_home
 
 # Create your views here.
 
@@ -39,7 +40,8 @@ def category(request, cat):
 def homepage(request):
     qs = Product.objects.all()
     qsc = Category.objects.all()
-    return render(request, "index.html", {"qs": qs, "product_count": get_product_count(request),"qsc":qsc})
+    form = newsletter_signup_home(request)
+    return render(request, "index.html", {"form":form,"qs": qs, "product_count": get_product_count(request),"qsc":qsc})
 
 
 def product(request, id):
