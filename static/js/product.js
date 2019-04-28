@@ -249,7 +249,7 @@ $(document).ready(function() {
       type: 'GET',
       url: window.location.href + '/addtocart/' + $('#quantity_input')[0].value,
       success: function(result) {
-        alert(result);
+        // alert(result);
       },
       error: function(result) {
         alert('error');

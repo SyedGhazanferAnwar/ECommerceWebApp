@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from newsletter.views import newsletter_signup_home
-
+from django.db.models import Q
 # Create your views here.
 
 
@@ -116,3 +116,14 @@ def addtocart(request, id, quantity):
         return HttpResponse('update Cart')
     else:
         return HttpResponse('unauthenticated')
+
+def query(request):
+    query=request.GET['search']
+    print(query)
+    qset = Q()
+    for term in query.split():
+        qset |= Q(name__contains=term)
+
+    products=Product.objects.filter(qset)
+    print(products)
+    return render(request, "search.html",{"search":query,"products":products})

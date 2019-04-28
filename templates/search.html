@@ -18,11 +18,8 @@
           <div class="row">
             <div class="col">
               <div class="home_content">
-                <div class="home_title">{{catName}}<span>.</span></div>
+                <div class="home_title">Search<span>: </span> {{search}}</div>
                 <div class="home_text">
-                  <p>
-                    {{des}}
-                  </p>
                 </div>
               </div>
             </div>
@@ -69,7 +66,7 @@
             <!-- Product -->
 
             <!-- Product -->
-            {%for i in qs%}
+            {%for i in products%}
             <div class="product">
               <div class="product_image">
                 <img src="/{{ i.profileImage }}" alt="My image" />

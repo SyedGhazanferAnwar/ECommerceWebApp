@@ -202,7 +202,7 @@ $(document).ready(function () {
   
   function updateCart(){
     $('.update_cart_button').on('click',()=>{
-      alert("AWWADS")
+      // alert("AWWADS")
       var item_ids=$$('.cart_item_id')
       var quantity=$$('#quantity_input')
       console.log(item_ids)
@@ -220,7 +220,7 @@ $(document).ready(function () {
             type: "post",
             data: {"item_ids":a.toString(),"quantity":b.toString(),csrfmiddlewaretoken: $('#CSRF').val()},
             success: function(result) {
-              alert(result);
+              // alert(result);
             },
             error: function(result) {
               alert('error');
@@ -244,13 +244,13 @@ $(document).ready(function () {
 
   function clearCart(){
     $('.clear_cart_button').on('click',()=>{
-      alert(window.location.href + '/clear/')
+      // alert(window.location.href + '/clear/')
       $.ajax({
         type: 'GET',
         url: window.location.href + '/clear',
         success: function(result) {
-          alert(result);
-          location.reload()
+          // alert(result);
+          window.location.href("/cart")
         },
         error: function(result) {
           alert('error');

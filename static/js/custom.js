@@ -44,7 +44,7 @@ $(document).ready(function()
 	initSearch();
 	initMenu();
 	initIsotope();
-
+	handleSearching();
 	/* 
 
 	2. Set Header
@@ -156,10 +156,11 @@ $(document).ready(function()
 
 			search.on('click', function()
 			{
-				panel.toggleClass('active');
+				panel.toggleClass('active');				
 			});
 		}
 	}
+	
 
 	/* 
 
@@ -297,5 +298,14 @@ $(document).ready(function()
 	        });
 		}
 	}
+	function handleSearching(){
 
+		$('.search_input').on('keydown',()=>{
+			if(event.keyCode === 13){
+				console.log($('.search_input')[0].value)
+				window.location.href="/query?search="+$('.search_input')[0].value;
+
+			}
+		});
+	}
 });
