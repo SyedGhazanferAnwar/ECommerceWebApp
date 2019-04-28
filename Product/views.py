@@ -116,3 +116,5 @@ def addtocart(request, id, quantity):
         return HttpResponse('update Cart')
     else:
         return HttpResponse('unauthenticated')
+
+
