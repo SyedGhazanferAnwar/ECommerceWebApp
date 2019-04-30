@@ -129,3 +129,7 @@ def query(request):
     products=Product.objects.filter(qset)
     print(products)
     return render(request, "search.html",{"search":query,"products":products})
+
+def allProducts(request):
+    products=Product.objects.filter()
+    return render(request, "allproducts.html",{"products":products})
