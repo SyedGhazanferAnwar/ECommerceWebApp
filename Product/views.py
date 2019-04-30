@@ -6,6 +6,11 @@ from django.contrib.auth.decorators import login_required
 from newsletter.views import newsletter_signup_home
 from django.db.models import Q
 from django.contrib.auth import authenticate
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.contrib.auth import logout
+from django.contrib.auth import login as auth_login
+from user.models import User
 # Create your views here.
 
 
@@ -28,16 +33,16 @@ def category(request, cat):
     qs = Product.objects.filter(category__name=cat)
     qsc = Category.objects.all()
     form = newsletter_signup_home(request)
-    des = get_object_or_404(Category,name = cat)
+    des = get_object_or_404(Category, name=cat)
     print(qsc)
     return render(request, "categories.html", {
         "qs": qs,
         "product_count": get_product_count(request),
         "qsc": qsc,
-        "catName":cat,
-        "des":des.description,
-        "form":form
-        })
+        "catName": cat,
+        "des": des.description,
+        "form": form
+    })
 
 
 def homepage(request):
@@ -56,6 +61,7 @@ def product(request, id):
     return render(request, 'product.html', {"qsc": qsc, 'product': ProductObj, 'related': related_prods, "product_count": get_product_count(request)})
 
 
+@login_required(login_url='/login')
 def cart(request):
     qsc = Category.objects.all()
     if not request.user.is_authenticated:
@@ -131,8 +137,59 @@ def query(request):
         qset |= Q(name__contains=term)
     products = Product.objects.filter(qset)
     print(products)
-    return render(request, "search.html",{"search":query,"products":products})
+    return render(request, "search.html", {"search": query, "products": products})
+
 
 def allProducts(request):
-    products=Product.objects.filter()
-    return render(request, "allproducts.html",{"products":products})
+    products = Product.objects.filter()
+    return render(request, "allproducts.html", {"products": products, "product_count": get_product_count(request)})
+
+
+def login(request):
+    r = False
+    if "reg" in request.session:
+        r = request.session["reg"]
+    request.session["reg"]=False
+    # if request.user.is_authenticated:
+    #     return redirect("/")
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(email=email, password=password)
+        if(user):
+            auth_login(request, user)
+            if 'next' not in request.GET:
+                next = '/'
+            else:
+                next = request.GET["next"]
+            print(next)
+            return redirect(next)
+        else:
+            return render(request, "login.html", {"alert": True})
+    print(r)
+    return render(request, "login.html", {"alert": False, "registered": r})
+
+def register(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        pass1 = request.POST.get("password1")
+        pass2 = request.POST.get("password2")
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        address = request.POST.get("address")
+        print(fname)
+        try:
+            obj = User.objects.get(email=email)
+        except Exception as e:
+            obj = None
+        if obj is None:
+            if pass1 == pass2:
+                print("trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+                user = User(email=email, firstName=fname,
+                            lastName=lname, address=address)
+                user.set_password(pass1)
+                user.save()
+                request.session['reg']=True
+                return redirect("/login")
+
+    return render(request, "register.html")

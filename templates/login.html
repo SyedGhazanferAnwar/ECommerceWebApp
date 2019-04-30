@@ -26,16 +26,14 @@
 <body>
 	
 	<div class="limiter">
-			<div class="alert alert-danger" role="alert">
-					Email or Password in correct
-				  </div>
+
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{% static 'Login_v1/images/img-01.png'%}" alt="IMG"></script>
 				</div>
 
-				<form class="login100-form validate-form" method="post">
+				<form class="login100-form validate-form" method="POST">
 					{% csrf_token %}
 					
 					<span class="login100-form-title">
@@ -66,6 +64,18 @@
 
 					
 				</form>
+				{% if alert %}
+				<div class="alert alert-danger" role="alert" style="margin-left: 65%;">
+					Email or Password in correct
+				  </div>
+				{% endif %}
+
+
+				{% if registered %}
+				<div class="alert alert-success" role="alert" style="margin-left: 65%;">
+					Registered Successfully Log-In to continue
+				  </div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
