@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Product',
     'contact',
     'newsletter',
+    'aboutus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

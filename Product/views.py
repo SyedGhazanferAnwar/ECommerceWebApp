@@ -27,15 +27,27 @@ def get_product_count(request):
 def category(request, cat):
     qs = Product.objects.filter(category__name=cat)
     qsc = Category.objects.all()
+<<<<<<< HEAD
     des = get_object_or_404(Category, name=cat)
+=======
+    form = newsletter_signup_home(request)
+    des = get_object_or_404(Category,name = cat)
+>>>>>>> b4b8d48fd53c319e19c248e5fcfab2baac7654e5
     print(qsc)
     return render(request, "categories.html", {
         "qs": qs,
         "product_count": get_product_count(request),
         "qsc": qsc,
+<<<<<<< HEAD
         "catName": cat,
         "des": des.description
     })
+=======
+        "catName":cat,
+        "des":des.description,
+        "form":form
+        })
+>>>>>>> b4b8d48fd53c319e19c248e5fcfab2baac7654e5
 
 
 def homepage(request):
@@ -129,17 +141,8 @@ def query(request):
         qset |= Q(name__contains=term)
     products = Product.objects.filter(qset)
     print(products)
-    return render(request, "search.html", {"search": query, "products": products})
+    return render(request, "search.html",{"search":query,"products":products})
 
-
-def login(request):
-    if request.method == "POST":
-        email = request.POST['email']
-        password = request.POST.get('password')
-        user = authenticate(email=email, password=password)
-        if user:
-            return redirect("/")
-        else:
-            return render(request, "login.html", {})
-
-    return render(request, "login.html", {})
+def allProducts(request):
+    products=Product.objects.filter()
+    return render(request, "allproducts.html",{"products":products})

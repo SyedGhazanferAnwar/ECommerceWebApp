@@ -1,11 +1,22 @@
 {% extends "base.html" %} {% block content %} {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/contact.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'styles/contact_responsive.css' %}" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'styles/contact.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'styles/contact_responsive.css' %}"
+/>
 <!-- Home -->
 <div class="home">
   <div class="home_container">
-    <div class="home_background" style="background-image:url({% static 'images/contact.jpg' %})"></div>
+    <div
+      class="home_background"
+      style="background-image:url({% static 'images/contact.jpg' %})"
+    ></div>
     <div class="home_content_container">
       <div class="container">
         <div class="row">
@@ -37,16 +48,24 @@
           <div class="section_subtitle">Say hello</div>
           {% if messages %}
           <ul class="messages">
-          {% for message in messages %}
+            {% for message in messages %}
             <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:red">{{ message }}</li> -->
-            <div class="alert alert-success" role="alert" >{{ message }}</div>
-          {% endfor %}
+            <div class="alert alert-success" role="alert">{{ message }}</div>
+            {% endfor %}
           </ul>
-        {% endif %}
+          {% endif %}
           <div class="contact_form_container">
-            <form action="#" id="contact_form" class="contact_form" method='POST'> {% csrf_token %}
+            <form
+              action="#"
+              id="contact_form"
+              class="contact_form"
+              method="POST"
+            >
+              {% csrf_token %}
               {{ form }}
-              <button class="button contact_button"><span>Send Message</span></button>
+              <button class="button contact_button">
+                <span>Send Message</span>
+              </button>
             </form>
           </div>
         </div>
@@ -58,41 +77,51 @@
           <div class="contact_info_section">
             <div class="contact_info_title">Marketing</div>
             <ul>
-              <li>Phone: <span>+53 345 7953 3245</span></li>
-              <li>Email: <span>yourmail@gmail.com</span></li>
+              <li>Phone: <span>+92 331 2228832</span></li>
+              <li>Email: <span>k163903@nu.edu.pk</span></li>
             </ul>
           </div>
           <div class="contact_info_section">
             <div class="contact_info_title">Shippiing & Returns</div>
             <ul>
-              <li>Phone: <span>+53 345 7953 3245</span></li>
-              <li>Email: <span>yourmail@gmail.com</span></li>
+              <li>Phone: <span>+92 322 1254689</span></li>
+              <li>Email: <span>k163898@nu.edu.pk</span></li>
             </ul>
           </div>
           <div class="contact_info_section">
             <div class="contact_info_title">Information</div>
             <ul>
-              <li>Phone: <span>+53 345 7953 3245</span></li>
-              <li>Email: <span>yourmail@gmail.com</span></li>
+              <li>Phone: <span>+92 333 0218675</span></li>
+              <li>Email: <span>k163891@nu.edu.pk</span></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-     <div class="row map_row">
+    <div class="row map_row">
       <div class="col">
-         Google Map 
+        Google Map
         <div class="map">
           <div id="google_map" class="google_map">
             <div class="map_container">
               <div id="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14480.813911520625!2d67.2646838!3d24.8568991!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x823a6a0100195ffd!2sFAST+University+Karachi+Campus!5e0!3m2!1sen!2s!4v1555533380522!5m2!1sen!2s" width="1680" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14480.813911520625!2d67.2646838!3d24.8568991!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x823a6a0100195ffd!2sFAST+University+Karachi+Campus!5e0!3m2!1sen!2s!4v1555533380522!5m2!1sen!2s"
+                  width="1680"
+                  height="600"
+                  frameborder="0"
+                  style="border:0"
+                  allowfullscreen
+                ></iframe>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/categories.js' %}"></script>
 {% endblock content %}
