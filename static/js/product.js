@@ -249,7 +249,10 @@ $(document).ready(function() {
       type: 'GET',
       url: window.location.href + '/addtocart/' + $('#quantity_input')[0].value,
       success: function(result) {
-        // alert(result);
+        if(result=="unauthenticated"){
+          window.location.href="/login";
+
+        }
       },
       error: function(result) {
         alert('error');

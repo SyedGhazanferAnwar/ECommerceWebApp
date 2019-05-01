@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Sublime</title>
+<title>YAB Store</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
@@ -44,7 +44,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="#">The YAP Store</a></div>
+							<div class="logo"><a href="#">The YAB Store</a></div>
 							<nav class="main_nav">
 								<ul>
 									<li class="active">
@@ -61,8 +61,12 @@
 									</li>
 									<li><a href="/all-products">Products</a></li>
 									<li><a href="/contact">Contact</a></li>
-									<li><a href="/about/our-story">About Us</a></li>
-
+									<!-- <li><a href="/about/our-story">About Us</a></li> -->
+									{% if not user.is_authenticated %}
+										<li><a href="/login">Login/Register</a></li>
+									{% else %}
+										<li><a href="/logout">Logout</a></li>
+									{% endif %}
 								</ul>
 							</nav>
 							<div class="header_extra ml-auto">
@@ -81,6 +85,7 @@
 										<div>Cart <span>( {{product_count}} )</span></div>
 									</a>
 								</div>
+							
 								<div class="search">
 									<div class="search_icon">
 										<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -123,7 +128,7 @@
 			</div>
 		</div>
 
-		<!-- Social -->
+		<!-- Social
 		<div class="header_social">
 			<ul>
 				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
@@ -131,7 +136,7 @@
 				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 			</ul>
-		</div>
+		</div> -->
 	</header>
 
 	<!-- Menu -->
@@ -197,10 +202,10 @@
                 <div class="row">
                     <div class="col">
                         <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                            <div class="footer_logo"><a style ="color:white;" href="#">The YAP Store.</a></div>
+                            <div class="footer_logo"><a style ="color:white;" href="#">The YAB Store.</a></div>
                             <div class="copyright ml-auto mr-auto" style="color:white;"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is designed by <i class="fa fa-heart-o" aria-hidden="true"></i> by <a style="color:white" href="https://colorlib.com" target="_blank">madgeeksstudion</a></div></div>
-                            <div class="footer_social ml-lg-auto">
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is designed by <i class="fa fa-heart-o" aria-hidden="true"></i> by <a style="color:white" href="" target="_blank">madgeekstudio</a></div></div>
+                            <div class="footer_social ml-lg-auto" style="margin-bottom: 8px">
                                 <ul>
                                     <li><a href="#"><i style="color:white" class="fa fa-pinterest" aria-hidden="true"></i></a></li>
                                     <li><a href="#"><i style="color:white" class="fa fa-instagram" aria-hidden="true"></i></a></li>
