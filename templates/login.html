@@ -7,30 +7,29 @@
 
 	{% load static %}
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{% static 'Login_v1/images/icons/favicon.ico'%}"></script>
+	<link rel="icon" type="image/png" href="{% static 'Login_v1/images/icons/favicon.ico'%}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/bootstrap/css/bootstrap.min.css'%}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/bootstrap/css/bootstrap.min.css'%}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}"></script>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/animate/animate.css'%}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/animate/animate.css'%}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/css-hamburgers/hamburgers.min.css'%}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/css-hamburgers/hamburgers.min.css'%}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/select2/select2.min.css'%}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/vendor/select2/select2.min.css'%}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/css/util.css'%}"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/css/main.css'%}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/css/util.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Login_v1/css/main.css'%}">
 <!--===============================================================================================-->
 </head>
 <body>
 	
 	<div class="limiter">
 
-		<div class="container-login100">
-			<div class="wrap-login100">
+		<div class="container-login100" >
+			<div class="wrap-login100" style="height:600px;">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="{% static 'Login_v1/images/img-01.png'%}" alt="IMG"></script>
+					<img src="{% static 'Login_v1/images/img-01.png'%}" alt="IMG">
 				</div>
 
 				<form class="login100-form validate-form" method="POST">
@@ -65,7 +64,7 @@
 					
 				</form>
 				{% if alert %}
-				<div class="alert alert-danger" role="alert" style="margin-left: 65%;">
+				<div class="alert alert-danger" role="alert" style="margin-left: 65%;height:fit-content;">
 					Email or Password in correct
 				  </div>
 				{% endif %}
@@ -101,7 +100,7 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'Login_v1/js/main.js' %}"></script>
 
 </body>
 </html>

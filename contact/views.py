@@ -3,7 +3,8 @@ from .forms import ContactForm
 from .models import Message
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-
+from Product.models import Category
+from Product.views import get_product_count
 # Create your views here.
 
 def contactForm(request):
@@ -20,4 +21,4 @@ def contactForm(request):
             msg_instance = Message.objects.create(firstName = first_name, lastName = last_name, email = email, subject = subject ,message = message)
             messages.success(request,'Form submission successful')
             return HttpResponseRedirect('')
-    return render(request, 'contact.html',{'form':form})
+    return render(request, 'contact.html',{'form':form,"qsc":Category.objects.all(),"product_count": get_product_count(request)})

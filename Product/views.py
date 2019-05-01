@@ -137,19 +137,19 @@ def query(request):
         qset |= Q(name__contains=term)
     products = Product.objects.filter(qset)
     print(products)
-    return render(request, "search.html", {"search": query, "products": products})
+    return render(request, "search.html", {"search": query, "products": products, "product_count": get_product_count(request), "qsc": Category.objects.all()})
 
 
 def allProducts(request):
     products = Product.objects.filter()
-    return render(request, "allproducts.html", {"products": products, "product_count": get_product_count(request)})
+    return render(request, "allproducts.html", {"products": products, "product_count": get_product_count(request), "qsc": Category.objects.all()})
 
 
 def login(request):
     r = False
     if "reg" in request.session:
         r = request.session["reg"]
-    request.session["reg"]=False
+    request.session["reg"] = False
     # if request.user.is_authenticated:
     #     return redirect("/")
     if request.method == "POST":
@@ -168,6 +168,7 @@ def login(request):
             return render(request, "login.html", {"alert": True})
     print(r)
     return render(request, "login.html", {"alert": False, "registered": r})
+
 
 def register(request):
     if request.method == "POST":
@@ -189,7 +190,7 @@ def register(request):
                             lastName=lname, address=address)
                 user.set_password(pass1)
                 user.save()
-                request.session['reg']=True
+                request.session['reg'] = True
                 return redirect("/login")
 
     return render(request, "register.html")
