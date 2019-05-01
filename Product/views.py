@@ -31,6 +31,7 @@ def get_product_count(request):
 
 def category(request, cat):
     qs = Product.objects.filter(category__name=cat)
+    count = len(qs)
     qsc = Category.objects.all()
     form = newsletter_signup_home(request)
     des = get_object_or_404(Category, name=cat)
@@ -41,7 +42,8 @@ def category(request, cat):
         "qsc": qsc,
         "catName": cat,
         "des": des.description,
-        "form": form
+        "form": form,
+        "count":count
     })
 
 
