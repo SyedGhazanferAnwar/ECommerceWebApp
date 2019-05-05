@@ -50,7 +50,7 @@
           <ul class="messages">
             {% for message in messages %}
             <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:red">{{ message }}</li> -->
-            <div class="alert alert-success" role="alert">{{ message }}</div>
+            <div id="{{ message }}" class="alert alert-success" role="alert">{{ message }}</div>
             {% endfor %}
           </ul>
           {% endif %}
@@ -63,7 +63,7 @@
             >
               {% csrf_token %}
               {{ form }}
-              <button class="button contact_button">
+              <button id="contact_page_button_id" class="button contact_button" >
                 <span>Send Message</span>
               </button>
             </form>

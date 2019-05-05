@@ -6,6 +6,6 @@ from contact.views import contactForm
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Product.urls')),
-    path('contact/',contactForm),
+    path('contact/',contactForm, name='contact'),
     path('about/',include('aboutus.urls')),
 ]

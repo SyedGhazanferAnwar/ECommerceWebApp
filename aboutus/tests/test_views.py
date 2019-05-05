@@ -1,21 +1,12 @@
-from django.test import Client
-from unittest import TestCase
+from django.test import RequestFactory
+from django.urls import reverse
+from aboutus.views import our_story
 
-class TestAboutUsView(TestCase):
+class TestAboutUsView:
 
-    def setUp(self):
-        self.client = Client()
-
-    def test_ourstory_navigation(self):
-        response = self.client.get('http://localhost:8000/about/our-story')
-        self.assertEqual(response.status_code,200)
-    def test_ourstory_nav_redirect(self):
-        response = self.client.get('https://localhost:8000/about/our-story/')
-        self.assertEqual(response.url,'/about/our-story')
-    def test_ourstory_about_redirect(self):
-        response = self.client.get('https://localhost:8000/about/')
-        self.assertEqual(response.url,'/about/our-story')
-    def test_ourstory_about_slashdirect(self):
-        response = self.client.get('https://localhost:8000/about')
-        self.assertEqual(response.url,'/about/')
-    
+    #test if product page loads with valid id
+    def test_about_us_view(self):
+        path = reverse('aboutus')
+        request = RequestFactory().get(path)
+        response = our_story(request)
+        assert response.status_code == 200

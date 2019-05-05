@@ -2,20 +2,28 @@ from django.test import TestCase
 from django.forms import ValidationError
 from contact.forms import ContactForm
 
-class FormTest(TestCase):
+valid_data = {'firstName':'Ali','lastName':'Hussam','email':'alihussam.cs@gmail.com','subject':'Test Message','message':"This is a test message"}
+invalid_data = {'firstName':'Ali','lastName':'Hussam','email':'alihussam.cs','subject':'Test Message','message':"This is a test message"}
+
+
+class TestContactForm(TestCase):
+
+    #Check if form accepts valid data or not
     def test_true_validity(self):
-        data = {'firstName':'Ali','lastName':'Hussam','email':'alihussam.cs@gmail.com','subject':'Test Message','message':"This is a test message"}
-        form = ContactForm(data=data)
+        form = ContactForm(data=valid_data)
         self.assertTrue(form.is_valid)
-    #check if form accepts invalid emails
+
+    #check if form accepts invalid data
     def test_false_validity(self):
-        data = {'firstName':'Ali','lastName':'Hussam','email':'alihussam.cs','subject':'Test Message','message':"This is a test message"}
-        form = ContactForm(data=data)
+        form = ContactForm(data=invalid_data)
         if not form.has_error :
-            raise ValidationError('NEWSLETTER FORM ACCEPTED INVALID EMAIL')
-    #check if form accepts null emails        
-    def test_accept_null_data(self):
-        data = {'firstName':'','lastName':'Hussam','email':'alihussam.cs@gmail.com','subject':None,'message':"This is a test message"}
-        form = ContactForm(data=data)
-        if not form.has_error:
-            raise ValidationError('NEWSLETTER FORM ACCEPTED NULL/BLANK CONTACT VALUES')
+            raise ValidationError('CONTACT FORM ACCEPTED INVALID EMAIL')
+        invalid_data["email"]=None
+        form = ContactForm(data=invalid_data)
+        if not form.has_error :
+            raise ValidationError('CONTACT FORM ACCEPTED Null EMAIL')
+        invalid_data["email"]="hussam.cs@gmail.com"
+        invalid_data["firstName"]=None
+        form = ContactForm(data=invalid_data)
+        if not form.has_error :
+            raise ValidationError('CONTACT FORM ACCEPTED Null NAME')

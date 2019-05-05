@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.test import TestCase
 from contact.models import Message
 from datetime import datetime, timedelta, timezone, date
-class TestModel(TestCase):
+class TestContactModel(TestCase):
     def setUp(self):
         Message.objects.create(firstName='User',lastName='SurName',email='email@gmail.com',
         subject='Subject of Message',message='This is a valid test message')
