@@ -203,3 +203,6 @@ def mlogout(request):
     logout(request)
     return redirect("/")
 
+@login_required(login_url='/login')
+def checkout(request):
+    return render(request,"checkout.html",{})
