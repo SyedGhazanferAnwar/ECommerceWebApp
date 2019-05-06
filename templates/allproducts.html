@@ -44,7 +44,7 @@
           <div
             class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start"
           >
-            <div class="results">Showing <span>12</span> results</div>
+            <div class="results">Showing <span>{{count}}</span> results</div>
             <div class="sorting_container ml-md-auto">
               <div class="sorting">
                 <ul class="item_sorting">
@@ -109,58 +109,50 @@
   <!-- Icon Boxes -->
 
   <div class="icon_boxes">
-    <div class="container">
-      <div class="row icon_box_row">
-        <!-- Icon Box -->
-        <div class="col-lg-4 icon_box_col">
-          <div class="icon_box">
-            <div class="icon_box_image">
-              <img src="{% static 'images/icon_1.svg' %}" alt="" />
-            </div>
-            <div class="icon_box_title">Free Shipping Worldwide</div>
-            <div class="icon_box_text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                a ultricies metus. Sed nec molestie.
-              </p>
+      <div class="container">
+        <div class="row icon_box_row">
+          <!-- Icon Box -->
+          <div class="col-lg-4 icon_box_col">
+            <div class="icon_box">
+              <div class="icon_box_image"><img src="{% static 'images/icon_1.svg' %}" alt="" /></div>
+              <div class="icon_box_title">Free Shipping Worldwide</div>
+              <div class="icon_box_text">
+                <p>
+                  We provide free shipping to our customers
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Icon Box -->
-        <div class="col-lg-4 icon_box_col">
-          <div class="icon_box">
-            <div class="icon_box_image">
-              <img src="{% static 'images/icon_2.svg' %}" alt="" />
-            </div>
-            <div class="icon_box_title">Free Returns</div>
-            <div class="icon_box_text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                a ultricies metus. Sed nec molestie.
-              </p>
+  
+          <!-- Icon Box -->
+          <div class="col-lg-4 icon_box_col">
+            <div class="icon_box">
+              <div class="icon_box_image"><img src="{% static 'images/icon_2.svg' %}" alt="" /></div>
+              <div class="icon_box_title">Free Returns</div>
+              <div class="icon_box_text">
+                <p>
+                  Our Porducts are free of cost refunded within 7 days after purchase
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Icon Box -->
-        <div class="col-lg-4 icon_box_col">
-          <div class="icon_box">
-            <div class="icon_box_image">
-              <img src="{% static 'images/icon_3.svg' %}" alt="" />
-            </div>
-            <div class="icon_box_title">24h Fast Support</div>
-            <div class="icon_box_text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                a ultricies metus. Sed nec molestie.
-              </p>
+  
+          <!-- Icon Box -->
+          <div class="col-lg-4 icon_box_col">
+            <div class="icon_box">
+              <div class="icon_box_image"><img src="{% static 'images/icon_3.svg' %}" alt="" /></div>
+              <div class="icon_box_title">24h Fast Support</div>
+              <div class="icon_box_text">
+                <p>
+                  We provide 24/7 online support to our customers.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  
 
   <!-- Newsletter -->
 

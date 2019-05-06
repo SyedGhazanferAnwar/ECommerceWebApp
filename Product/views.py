@@ -43,7 +43,7 @@ def category(request, cat):
         "catName": cat,
         "des": des.description,
         "form": form,
-        "count":count
+        "count": count
     })
 
 
@@ -146,7 +146,7 @@ def query(request):
 
 def allProducts(request):
     products = Product.objects.filter()
-    return render(request, "allproducts.html", {"products": products, "product_count": get_product_count(request), "qsc": Category.objects.all()})
+    return render(request, "allproducts.html", {"products": products, "product_count": get_product_count(request), "qsc": Category.objects.all(), "count": len(products)})
 
 
 def login(request):
@@ -199,10 +199,25 @@ def register(request):
 
     return render(request, "register.html")
 
+
 def mlogout(request):
     logout(request)
     return redirect("/")
 
+
 @login_required(login_url='/login')
 def checkout(request):
-    return render(request,"checkout.html",{})
+    qsc = Category.objects.all()
+    user = User.objects.get(pk=request.user.id)
+    context = {
+        "user": user
+    }
+    mcart = Cart.objects.filter(user=request.user)
+    if len(mcart) <= 0:
+        return render(request, 'cart.html', {'container': None, 'cartPrice': None, "qsc": qsc, "product_count": get_product_count(request)})
+    else:
+        container = Container.objects.filter(cart=mcart[0])
+        totalPrice = 0
+        for i in container:
+            totalPrice += i.product.price*i.quantity
+    return render(request, 'checkout.html', {"user": user, "qsc": qsc, 'container': container, 'cartPrice': totalPrice, "product_count": get_product_count(request)})
