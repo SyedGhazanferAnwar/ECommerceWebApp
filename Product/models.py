@@ -35,7 +35,7 @@ class Product(models.Model):
 
 
 class singleImage(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to="static/product_img")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     class Meta:

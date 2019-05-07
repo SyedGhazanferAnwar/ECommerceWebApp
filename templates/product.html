@@ -1,13 +1,24 @@
 {% extends "base.html" %} {% block content %} {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/product.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'styles/product_responsive.css' %}" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'styles/product.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'styles/product_responsive.css' %}"
+/>
 
 <!-- Home -->
 
 <div class="home">
   <div class="home_container">
-    <div class="home_background" style="background-image:url({% static 'images/categories.jpg' %})"></div>
+    <div
+      class="home_background"
+      style="background-image:url({% static 'images/categories.jpg' %})"
+    ></div>
     <div class="home_content_container">
       <div class="container">
         <div class="row">
@@ -36,23 +47,35 @@
       <div class="col-lg-6">
         <div class="details_image">
           <div class="details_image_large">
-            <img src="/{{ product.profileImage.url }}" alt="OOPS" height="600" width="650"/>
+            <img
+              src="/{{ product.profileImage.url }}"
+              alt="OOPS"
+              height="600"
+              width="650"
+            />
             <!--<img src="{% static 'images/details_1.jpg' %}" alt="" />-->
-            <div class="product_extra product_new"><a href="categories.html">{{ product.category }}</a></div>
+            <div class="product_extra product_new">
+              <a href="categories.html">{{ product.category }}</a>
+            </div>
           </div>
-          <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-            <div class="details_image_thumbnail active" data-image="/{{ product.profileImage.url }}">
+          <div
+            class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between"
+          >
+            <div
+              class="details_image_thumbnail active"
+              data-image="/{{ product.profileImage.url }}"
+            >
               <img src="/{{ product.profileImage.url }}" alt="" />
             </div>
-            <div class="details_image_thumbnail" data-image="images/details_2.jpg">
-              <img src="{% static 'images/details_2.jpg' %}" alt="" />
+            {%for x in zimages %}
+
+            <div
+              class="details_image_thumbnail"
+              data-image="{% static 'product_img/' %}{{ x }}"
+            >
+              <img src="{% static 'product_img/' %}{{ x }}" alt="" />
             </div>
-            <div class="details_image_thumbnail" data-image="images/details_3.jpg">
-              <img src="{% static 'images/details_3.jpg' %}" alt="" />
-            </div>
-            <div class="details_image_thumbnail" data-image="images/details_4.jpg">
-              <img src="{% static 'images/details_4.jpg' %}" alt="" />
-            </div>
+            {%endfor%}
           </div>
         </div>
       </div>
@@ -61,18 +84,16 @@
       <div class="col-lg-6">
         <div class="details_content">
           <div class="details_name">{{ product.name }}</div>
-          <div class="details_discount">{{ product.price}}</div>
+          <div class="details_discount">{{ product.price }}</div>
           <div class="details_price">{{ product.getDiscountedPrice }}</div>
 
           <!-- In Stock -->
           <div class="in_stock_container">
             <div class="availability">Availability:</div>
-            <span>{% if product.stock >= 1 %}
-                    In Stock  ({{ product.stock }})
-                  {% else %}
-                    Out of Stock
-                  {% endif %}
-          </span>
+            <span
+              >{% if product.stock >= 1 %} In Stock ({{ product.stock }}) {%
+              else %} Out of Stock {% endif %}
+            </span>
           </div>
           <div class="details_text">
             <p>
@@ -84,17 +105,30 @@
           <div class="product_quantity_container">
             <div class="product_quantity clearfix">
               <span>Qty</span>
-              <input id="quantity_input" type="text" pattern="[0-9]*" value="1" />
+              <input
+                id="quantity_input"
+                type="text"
+                pattern="[0-9]*"
+                value="1"
+              />
               <div class="quantity_buttons">
-                <div id="quantity_inc_button" class="quantity_inc quantity_control">
+                <div
+                  id="quantity_inc_button"
+                  class="quantity_inc quantity_control"
+                >
                   <i class="fa fa-chevron-up" aria-hidden="true"></i>
                 </div>
-                <div id="quantity_dec_button" class="quantity_dec quantity_control">
+                <div
+                  id="quantity_dec_button"
+                  class="quantity_dec quantity_control"
+                >
                   <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </div>
               </div>
             </div>
-            <div class="button cart_button" id="add-to-cart"><a href="">Add to cart</a></div>
+            <div class="button cart_button" id="add-to-cart">
+              <a href="">Add to cart</a>
+            </div>
           </div>
 
           <!-- Share -->
@@ -102,13 +136,19 @@
             <span>Share:</span>
             <ul>
               <li>
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"
+                  ><i class="fa fa-pinterest" aria-hidden="true"></i
+                ></a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"
+                  ><i class="fa fa-instagram" aria-hidden="true"></i
+                ></a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"
+                  ><i class="fa fa-facebook" aria-hidden="true"></i
+                ></a>
               </li>
               <li>
                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -151,15 +191,26 @@
         <div class="product_grid">
           <!-- Product -->
           {% for r in related %}
-            <div class="product" >
-              <!-- <div class="product_image"><img src="{% static 'images/product_1.jpg' %}" alt="" /></div> -->
-              <div class="product_image"><img src="/{{ r.profileImage.url }}" alt="" height="220" width="220"/></div>
-              <div class="product_extra product_new"><a href="categories.html">{{ r.category }}</a></div>
-              <div class="product_content">
-                <div class="product_title"><a href="/product/{{r.id}}">{{ r.name }}</a></div>
-                <div class="product_price">{{ r.price }}</div>
-              </div>
+          <div class="product">
+            <!-- <div class="product_image"><img src="{% static 'images/product_1.jpg' %}" alt="" /></div> -->
+            <div class="product_image">
+              <img
+                src="/{{ r.profileImage.url }}"
+                alt=""
+                height="220"
+                width="220"
+              />
             </div>
+            <div class="product_extra product_new">
+              <a href="categories.html">{{ r.category }}</a>
+            </div>
+            <div class="product_content">
+              <div class="product_title">
+                <a href="/product/{{ r.id }}">{{ r.name }}</a>
+              </div>
+              <div class="product_price">{{ r.price }}</div>
+            </div>
+          </div>
           {% endfor %}
           <!-- Product -->
           <!-- <div class="product">
@@ -209,13 +260,20 @@
           <div class="newsletter_title">Subscribe to our newsletter</div>
           <div class="newsletter_text">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
+              ultricies metus. Sed nec molestie eros
             </p>
           </div>
           <div class="newsletter_form_container">
             <form action="#" id="newsletter_form" class="newsletter_form">
-              <input type="email" class="newsletter_input" required="required" />
-              <button class="newsletter_button trans_200"><span>Subscribe</span></button>
+              <input
+                type="email"
+                class="newsletter_input"
+                required="required"
+              />
+              <button class="newsletter_button trans_200">
+                <span>Subscribe</span>
+              </button>
             </form>
           </div>
         </div>

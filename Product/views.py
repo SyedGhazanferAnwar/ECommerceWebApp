@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Cart, Container, Category
+from .models import Product, Cart, Container, Category,singleImage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -62,7 +62,10 @@ def product(request, id):
     ProductObj = get_object_or_404(Product, pk=id)
     related_prods = Product.objects.filter(
         category=ProductObj.category).exclude(pk=id)[:4]
-    return render(request, 'product.html', {"qsc": qsc, 'product': ProductObj, 'related': related_prods, "product_count": get_product_count(request)})
+    zimages=singleImage.objects.filter(product=ProductObj)
+    print(related_prods)
+    print(zimages)
+    return render(request, 'product.html', {"qsc": qsc, 'product': ProductObj, 'related': related_prods, "product_count": get_product_count(request),"zimages":zimages})
 
 
 @login_required(login_url='/login')
