@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404
 from django.test import TestCase
 from contact.models import Message
 from datetime import datetime, timedelta, timezone, date
+import pytest
+
+@pytest.mark.django_db
 class TestContactModel(TestCase):
     def setUp(self):
         Message.objects.create(firstName='User',lastName='SurName',email='email@gmail.com',

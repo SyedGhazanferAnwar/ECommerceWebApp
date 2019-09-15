@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404
 from django.test import TestCase
 from newsletter.models import NewsUser
 from datetime import datetime, timedelta, timezone, date
+import pytest
+
+@pytest.mark.django_db
 class TestNewsletterModel(TestCase):
     def setUp(self):
         NewsUser.objects.create(email='email@gmail.com')

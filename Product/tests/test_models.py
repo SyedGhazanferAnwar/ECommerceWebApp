@@ -2,6 +2,7 @@ from django.test import TestCase
 from Product.models import Product, Category
 import pytest
 
+@pytest.mark.django_db
 class TestProductModel(TestCase):
 
     def setUp(self):
@@ -36,6 +37,7 @@ class TestProductModel(TestCase):
         self.assertNotEqual(newObj.Description,None)
         self.assertNotEqual(newObj.Description,'')
 
+@pytest.mark.django_db
 class TestCategoryModel(TestCase):
     def setUp(self):
         Category.objects.create(name='testcat',description='okay new cat')
