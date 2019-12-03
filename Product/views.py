@@ -123,6 +123,16 @@ def sleep():
     time.sleep(5)
     return
 
+
+def removeItemFromCart(request):
+    if request.method == "POST":
+        item_id = request.POST.get("item_id")    
+        mcart=get_object_or_404(Cart, user=request.user)
+        pproduct=get_object_or_404(Product, pk=item_id)
+        Container.objects.filter(cart=mcart).filter(product=pproduct).delete()
+        return HttpResponse('Sucessfully Deleted')
+    else:
+        return HttpResponse('NOTHING')
 def addtocart(request, id, quantity):
 
     print(request.user)
