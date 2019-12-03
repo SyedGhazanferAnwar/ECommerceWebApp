@@ -291,7 +291,7 @@ def forgetPassword(request):
                 a = UID.objects.get(uid=token)
             except Exception as e:
                 user = None
-                return HttpResponse("invalid")#Invalid token email exists
+                return render(request,"invalid.html")#Invalid token email exists
             return render(request,"reset-password.html",{"token":token})
 def reset(request):
     if request.method=="POST":
