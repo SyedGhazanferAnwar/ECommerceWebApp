@@ -143,7 +143,7 @@ def addtocart(request, id, quantity):
         cart.save()
         return HttpResponse('update Cart')
     else:
-        return redirect("/login")
+        return HttpResponse("unauthenticated")
 
 
 def query(request):

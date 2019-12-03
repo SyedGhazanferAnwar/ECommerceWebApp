@@ -250,9 +250,9 @@ e.preventDefault()
         type: 'GET',
         url: window.location.href + '/addtocart/' + $('#quantity_input')[0].value,
         success: function(result) {
+          console.log(result)
           if(result=="unauthenticated"){
-
-            // window.location.href="/login";
+            window.location.href="/login?next="+window.location.pathname;
   
           }else{
             window.location.href=window.location.href
