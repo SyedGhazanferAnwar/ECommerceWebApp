@@ -95,6 +95,7 @@ def cart(request):
 
 def updateCart(request):
     if request.method == 'POST':
+        print("YALLAH HABIBI")
         item_ids = request.POST.get('item_ids')
         quantity = request.POST.get('quantity')
         print(item_ids)

@@ -179,8 +179,14 @@ $(document).ready(function () {
 
         var inp = $('.quantity_input' + lastChar)
         var originalVal = inp.val();
+        console.log(originalVal)
         var endVal = parseFloat(originalVal) + 1;
-        inp.val(endVal);
+        console.log(endVal)
+        
+        // $('.quantity_input' + lastChar).value=endVal;
+        inp.val(endVal)
+        // alert(document.getElementById('quantity_input').value);
+
       });
       dec.on('click', function () {
 
@@ -205,15 +211,19 @@ $(document).ready(function () {
       // alert("AWWADS")
       var item_ids=$$('.cart_item_id')
       var quantity=$$('#quantity_input')
-      console.log(item_ids)
-      console.log(quantity)
+      // console.log(item_ids)
+      // console.log(quantity)
+      // alert(item_ids[0].innerText)
+      // alert(quantity[0].value)
+
       var a=[]
       var b=[]
       for(var i=0;i<item_ids.length;i++){
         a[i]=item_ids[i].innerText
-        b[i]=quantity[i].defaultValue
+        b[i]=quantity[i].value
       }
       console.log(a)
+      // alert("aaa"+b[0])
       console.log(b)
           $.ajax({
             url: window.location.href + '/update',
