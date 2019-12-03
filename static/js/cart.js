@@ -215,6 +215,8 @@ $(document).ready(function () {
       // console.log(quantity)
       // alert(item_ids[0].innerText)
       // alert(quantity[0].value)
+      // alert(item_ids[1].innerText)
+      // alert(quantity[1].value)
 
       var a=[]
       var b=[]

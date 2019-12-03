@@ -98,13 +98,15 @@ def updateCart(request):
         print("YALLAH HABIBI")
         item_ids = request.POST.get('item_ids')
         quantity = request.POST.get('quantity')
-        print(item_ids)
-        print(quantity)
+        # print(item_ids[1])
+        # print(quantity[1])
+        item_ids=item_ids.split(",")
+        quantity=quantity.split(",")
         for i in range(0, len(item_ids)):
             cart = Cart.objects.get(user=request.user)
-            yproduct = Product.objects.get(pk=item_ids[0])
+            yproduct = Product.objects.get(pk=item_ids[i])
             container = Container.objects.get(product=yproduct, cart=cart)
-            container.quantity = quantity[0]
+            container.quantity = quantity[i]
             container.save()
     return HttpResponse("UPDATED")
 
