@@ -269,7 +269,7 @@ def forgetPassword(request):
                 user = User.objects.get(email=email)
             except Exception as e:
                 user = None
-                return render("")#no such email exists
+                return render(request,"verify.html",{"alert":True})#no such email exists
             s = randomString(20)
             msg = MIMEMultipart()
             msg['From'] = "me@salmanarshad.net"
@@ -294,7 +294,7 @@ def forgetPassword(request):
             UID.objects.filter(user=user).delete()
             a= UID(user=user,uid=s)
             a.save()
-            return HttpResponse ("done")
+            return render(request,"email.html")
         token= request.GET.get("token","")
         if token!="":
             try:
@@ -303,6 +303,7 @@ def forgetPassword(request):
                 user = None
                 return render(request,"invalid.html")#Invalid token email exists
             return render(request,"reset-password.html",{"token":token})
+    return render(request,"verify.html")
 def reset(request):
     if request.method=="POST":
         p1 = request.POST.get("p1")
