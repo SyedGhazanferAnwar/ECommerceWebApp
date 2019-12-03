@@ -187,6 +187,7 @@ $(document).ready(function() {
         originalVal = input.val();
         endVal = parseFloat(originalVal) + 1;
         input.val(endVal);
+        // console.log($('#dustbin'))
       });
 
       decButton.on('click', function() {
@@ -239,6 +240,7 @@ $(document).ready(function() {
       });
     }
   }
+
 
   //My modifications add to cart
   $('#add-to-cart').on('click', (e) => {

@@ -271,3 +271,20 @@ $(document).ready(function () {
     })
   }
 });
+
+$('.dustbin').on('click',(e)=>{
+  console.log($('.dustbin'))
+  let zid=$('.dustbin')[0].id
+    $.ajax({
+      type: 'POST',
+      url: window.location.href + '/removeItemFromCart',
+      data: {"item_id":zid,csrfmiddlewaretoken: $('#CSRF').val()},
+      success: function(result) {
+        alert(result);
+        window.location.href="/cart"
+      },
+      error: function(result) {
+        alert('error');
+      },
+    });
+});

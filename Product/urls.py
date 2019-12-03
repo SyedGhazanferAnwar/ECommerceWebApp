@@ -17,5 +17,7 @@ urlpatterns = [
     path('all-products', views.allProducts, name='cart'),
     path("checkout",views.checkout,name="checkout"),
     path("forget-password",views.forgetPassword),
-    path("reset",views.reset)
+    path("reset",views.reset),
+    path("cart/removeItemFromCart",views.removeItemFromCart,name='cart')
+
 ]
