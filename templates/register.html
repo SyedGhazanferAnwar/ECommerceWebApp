@@ -4,7 +4,16 @@
 	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<style>
+	.error{
+	margin-top: 0px!important; 
+    position: absolute;
+    top: 30px;
+    min-width: 600px;
+    text-align: center;
+}
+	
+</style>
 	{% load static %}
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{% static 'Login_v1/images/icons/favicon.ico'%}"></script>
@@ -28,6 +37,11 @@
 	<div class="limiter">
 
 		<div class="container-login100">
+			{% if error %}
+				<div class="alert alert-danger error" role="alert">
+						{{error}}
+					  </div>
+			{%endif%}
 			<div class="wrap-login100"  style="height:700px;  padding: 100px 130px 33px 95px !important;">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{% static 'Login_v1/images/img-01.png'%}" alt="IMG">

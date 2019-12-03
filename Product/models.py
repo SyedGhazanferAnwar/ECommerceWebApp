@@ -61,6 +61,8 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.user.firstName+' '+self.user.lastName+'(CART)'
+ 
+class UID(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    uid = models.CharField(max_length=250)
 
-# 1 asd asdsa 10
-# bauhat sare cart mein aik product asakta hai

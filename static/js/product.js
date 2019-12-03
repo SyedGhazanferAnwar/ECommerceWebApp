@@ -241,22 +241,31 @@ $(document).ready(function() {
   }
 
   //My modifications add to cart
-  $('#add-to-cart').on('click', () => {
+  $('#add-to-cart').on('click', (e) => {
+e.preventDefault()
+    var audio = new Audio('/static/notif.mp3');
+    audio.play();
+    setTimeout(()=>{
+      $.ajax({
+        type: 'GET',
+        url: window.location.href + '/addtocart/' + $('#quantity_input')[0].value,
+        success: function(result) {
+          if(result=="unauthenticated"){
+
+            // window.location.href="/login";
+  
+          }else{
+            window.location.href=window.location.href
+          }
+        },
+        error: function(result) {
+          alert('error');
+        },
+      });
+    },3000)
     // var url = window.location.href;
     // var arr = url.split('/')[4];
     // alert($('#quantity_input')[0].value);
-    $.ajax({
-      type: 'GET',
-      url: window.location.href + '/addtocart/' + $('#quantity_input')[0].value,
-      success: function(result) {
-        if(result=="unauthenticated"){
-          window.location.href="/login";
 
-        }
-      },
-      error: function(result) {
-        alert('error');
-      },
-    });
   });
 });

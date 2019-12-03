@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Cart, Container, Category,singleImage
+from .models import Product, Cart, Container, Category,singleImage,UID
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,9 @@ from django.contrib.auth import logout
 from django.contrib.auth import login as auth_login
 from user.models import User
 # Create your views here.
-
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
 
 def get_product_count(request):
     try:
@@ -113,8 +115,13 @@ def clearCart(request):
     print("clearCart")
     return HttpResponse("Sucessfully Cleared")
 
+import time
+def sleep():
+    time.sleep(5)
+    return
 
 def addtocart(request, id, quantity):
+
     print(request.user)
     print("Asdasdsad", quantity)
     if request.user.is_authenticated:
@@ -133,7 +140,7 @@ def addtocart(request, id, quantity):
         cart.save()
         return HttpResponse('update Cart')
     else:
-        return HttpResponse('unauthenticated')
+        return redirect("/login")
 
 
 def query(request):
@@ -192,15 +199,21 @@ def register(request):
             obj = None
         if obj is None:
             if pass1 == pass2:
-                print("trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+                if(len(pass1)<8):
+                    return render(request, "register.html",{"error":"Passsword length must be 8 characters long"})
                 user = User(email=email, firstName=fname,
                             lastName=lname, address=address)
                 user.set_password(pass1)
                 user.save()
                 request.session['reg'] = True
                 return redirect("/login")
+            else:
+                return render(request, "register.html",{"error":"Passswords donot match"})
+        else:
+            return render(request, "register.html",{"error":"Email address already exixts"})
 
     return render(request, "register.html")
+
 
 
 def mlogout(request):
@@ -224,3 +237,74 @@ def checkout(request):
         for i in container:
             totalPrice += i.product.price*i.quantity
     return render(request, 'checkout.html', {"user": user, "qsc": qsc, 'container': container, 'cartPrice': totalPrice, "product_count": get_product_count(request)})
+
+
+import random
+import string
+
+def randomString(stringLength=10):
+    """Generate a random string of fixed length """
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
+
+def forgetPassword(request):
+    if request.method=="GET":
+        email = request.GET.get("email","")
+        print(email)
+        if email:
+            try:
+                user = User.objects.get(email=email)
+            except Exception as e:
+                user = None
+                return render("")#no such email exists
+            s = randomString(20)
+            msg = MIMEMultipart()
+            msg['From'] = "me@salmanarshad.net"
+            msg['To'] = email
+            msg['Subject'] = "Asaan Store - Reset Password"
+            message = "Please click the link below to reset your Password. If you have not requested such action Igonre this email. <br> http://localhost:5555/forget-password?token="+s
+            # add in the message body
+            msg.attach(MIMEText(message, 'html'))
+
+            # create server
+            server = smtplib.SMTP('smtp-mail.outlook.com: 587')
+
+            server.starttls()
+
+            # Login Credentials for sending the mail
+            server.login(msg['From'], "fotoalpha44&")
+
+            # send the message via the server.
+            server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+            server.quit()
+            UID.objects.filter(user=user).delete()
+            a= UID(user=user,uid=s)
+            a.save()
+            return HttpResponse ("done")
+        token= request.GET.get("token","")
+        if token!="":
+            try:
+                a = UID.objects.get(uid=token)
+            except Exception as e:
+                user = None
+                return HttpResponse("invalid")#Invalid token email exists
+            return render(request,"reset-password.html",{"token":token})
+def reset(request):
+    if request.method=="POST":
+        p1 = request.POST.get("p1")
+        p2 = request.POST.get("p2")
+        token = request.POST.get("token")
+        if (p1!=p1):
+            return render(request, "reset-password.html",{"error":"Password do not match","token":token})
+        if len(p1)<8:
+            return render(request, "reset-password.html",{"error":"Password length is less than 8","token":token})
+        user = UID.objects.get(uid=token).user
+        user.set_password(p1)
+        user.save()
+        UID.objects.filter(user=user).delete()
+        return redirect("/login")
+
+            
+
+            
