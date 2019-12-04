@@ -66,3 +66,7 @@ class UID(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length=250)
 
+
+
+
+
