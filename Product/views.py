@@ -275,7 +275,7 @@ def forgetPassword(request):
             msg['From'] = "me@salmanarshad.net"
             msg['To'] = email
             msg['Subject'] = "Asaan Store - Reset Password"
-            message = "Please click the link below to reset your Password. If you have not requested such action Igonre this email. <br> http://localhost:5555/forget-password?token="+s
+            message = "Please click the link below to reset your Password. If you have not requested such action Igonre this email. <br> http://34.93.207.121:8000/forget-password?token="+s
             # add in the message body
             msg.attach(MIMEText(message, 'html'))
 
