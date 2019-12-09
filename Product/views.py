@@ -50,12 +50,11 @@ def category(request, cat):
 
 
 def homepage(request):
-    print(request.COOKIES.get('sessionid') )
+    print(request.COOKIES)
     qs = Product.objects.all()
     qsc = Category.objects.all()
     form = newsletter_signup_home(request)
-    print("___________")
-    print(request)
+
     return render(request, "index.html", {"form": form, "qs": qs, "product_count": get_product_count(request), "qsc": qsc})
 
 
